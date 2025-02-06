@@ -1,0 +1,87 @@
+{
+  "name": "@goatjs/express-status-monitor",
+  "description": "Realtime monitor for Express server appliations",
+  "version": "2025.2.6",
+  "author": {
+    "email": "simonegauli@gmail.com",
+    "name": "Simone Gauli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pnlvfx/express-status-monitor.git"
+  },
+  "keywords": [
+    "node",
+    "status",
+    "monitoring",
+    "express",
+    "charts",
+    "performance"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/status-monitor.js",
+  "module": "./dist/status-monitor.js",
+  "types": "./dist/status-monitor.d.ts",
+  "exports": {
+    "types": "./dist/status-monitor.d.ts",
+    "import": "./dist/status-monitor.js"
+  },
+  "scripts": {
+    "generate:event-loop-stats": "node ./tools/generate-event-loop-types.ts src/types/event-loop-stats.ts",
+    "types": "yarn generate:event-loop-stats",
+    "tsc": "tsc --noEmit true",
+    "unused": "node ./tools/unused.ts",
+    "test": "rimraf coverage && jest --coverage",
+    "lint": "eslint",
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "prepare": "husky && npm run build",
+    "prepack": "yarn build",
+    "prepublishOnly": "yarn test && eslint"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "public"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@goatjs/node": "github:Pnlvfx/goatjs#workspace=@goatjs/node",
+    "@types/debug": "^4.1.12",
+    "@types/eslint__js": "^8.42.3",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "@types/on-headers": "^1.0.3",
+    "@types/pidusage": "^2.0.5",
+    "eslint": "^9.19.0",
+    "eslint-plugin-sonarjs": "^3.0.1",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "event-loop-stats": "^1.4.1",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "ts-unused-exports": "^11.0.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  },
+  "dependencies": {
+    "debug": "^4.3.5",
+    "handlebars": "^4.7.8",
+    "on-headers": "^1.0.2",
+    "pidusage": "^3.0.2"
+  },
+  "peerDependencies": {
+    "event-loop-stats": "^1.4.1",
+    "socket.io": "^4.7.5"
+  },
+  "peerDependenciesMeta": {
+    "event-loop-stats": {
+      "optional": true
+    }
+  }
+}

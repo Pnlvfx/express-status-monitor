@@ -1,0 +1,37 @@
+{
+  "name": "example",
+  "description": "Express status monitor example.",
+  "version": "2025.2.2",
+  "private": true,
+  "license": "MIT",
+  "author": "Simone Gauli",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "tsc": "tsc --noEmit true",
+    "lint": "eslint",
+    "dev": "tsc -p tsconfig.build.json -w & node --watch .",
+    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "start": "node ."
+  },
+  "dependencies": {
+    "@goatjs/express-status-monitor": "*",
+    "express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "eslint": "9.19.0",
+    "eslint-plugin-sonarjs": "^3.0.1",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "event-loop-stats": "^1.4.1",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "socket.io": "^4.8.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  }
+}
