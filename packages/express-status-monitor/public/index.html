@@ -1,14 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>{{title}}</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"
-      integrity="sha512-iqRVtNB+t9O+epcgUTIPF+nklypcR23H1yR1NFM9kffn6/iBhZ9bTB6oKLaGMv8JE9UgjcwfBFg/eHC/VMws+g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
       {{{style}}}
     </style>
@@ -113,13 +108,7 @@
     <script>
       var port = '{{port}}';
       var socketPath = '{{socketPath}}';
-      {
-        {
-          {
-            script;
-          }
-        }
-      }
+      {{{script}}}
     </script>
   </body>
 </html>
