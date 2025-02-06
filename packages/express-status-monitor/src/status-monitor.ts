@@ -1,7 +1,7 @@
 import type { ChartVisibility, ExpressStatusConfig } from './types/config.js';
 import type { Request, Response, NextFunction } from 'express';
 import type { SocketRequest } from './types/request.js';
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import Handlebars from 'handlebars';
 import onHeaders from 'on-headers';
@@ -10,7 +10,7 @@ import { healthChecker } from './helpers/health-checker.js';
 import { onHeadersListener } from './helpers/on-headers-listener.js';
 import { validate } from './helpers/validate.js';
 
-export const statusMonitor = (config?: ExpressStatusConfig) => {
+export const statusMonitor = async (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
   const bodyClasses = [];
   for (const key in validatedConfig.chartVisibility) {
@@ -24,23 +24,21 @@ export const statusMonitor = (config?: ExpressStatusConfig) => {
     port: validatedConfig.port,
     socketPath: validatedConfig.socketPath,
     bodyClasses: bodyClasses.join(' '),
-    script: fs.readFileSync(path.join(import.meta.dirname, '../public/javascripts/app.js')),
-    style: fs.readFileSync(path.join(import.meta.dirname, '../public/stylesheets/', validatedConfig.theme)),
+    script: await fs.readFile(path.join(import.meta.dirname, '../public/javascripts/app.js')),
+    style: await fs.readFile(path.join(import.meta.dirname, '../public/stylesheets/', validatedConfig.theme)),
   };
 
-  const htmlTmpl = fs.readFileSync(path.join(import.meta.dirname, '../public/index.html')).toString();
+  const htmlTmpl = await fs.readFile(path.join(import.meta.dirname, '../public/index.html'));
+  const render = Handlebars.compile(htmlTmpl.toString());
 
-  const render = Handlebars.compile(htmlTmpl);
-
-  const middleware = (socketRequest: Request, res: Response, next: NextFunction) => {
+  const middleware = async (socketRequest: Request, res: Response, next: NextFunction) => {
     const req = socketRequest as SocketRequest;
     socketIoInit(req.socket.server, validatedConfig);
     const startTime = process.hrtime();
 
     if (req.path === validatedConfig.path) {
-      healthChecker(validatedConfig.healthChecks).then((results) => {
-        res.send(render({ ...data, healthCheckResults: results }));
-      });
+      const results = await healthChecker(validatedConfig.healthChecks);
+      res.send(render({ ...data, healthCheckResults: results }));
     } else {
       if (!req.path.startsWith(validatedConfig.ignoreStartsWith)) {
         onHeaders(res, () => {
@@ -51,11 +49,12 @@ export const statusMonitor = (config?: ExpressStatusConfig) => {
       next();
     }
   };
+
   middleware.middleware = middleware;
-  middleware.pageRoute = (_req: Request, res: Response) => {
-    healthChecker(validatedConfig.healthChecks).then((results) => {
-      res.send(render({ ...data, healthCheckResults: results }));
-    });
+  middleware.pageRoute = async (_req: Request, res: Response) => {
+    const results = await healthChecker(validatedConfig.healthChecks);
+    res.send(render({ ...data, healthCheckResults: results }));
   };
+
   return middleware;
 };

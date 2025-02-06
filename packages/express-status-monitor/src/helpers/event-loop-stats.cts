@@ -4,15 +4,13 @@ interface EventLoop {
 }
 
 export const getEventLoopStats = () => {
-  let eventLoopStats: EventLoop | undefined;
-
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module
-    eventLoopStats = require('event-loop-stats');
+    const eventLoopStats = require('event-loop-stats') as EventLoop;
     return eventLoopStats;
-  } catch (err) {
+  } catch {
     // eslint-disable-next-line no-console
-    console.warn('Ignoring event loop metrics...', err);
+    console.warn('Ignoring event loop metrics, to include event loop metrics run npm install event-loop-stats');
     return;
   }
 };

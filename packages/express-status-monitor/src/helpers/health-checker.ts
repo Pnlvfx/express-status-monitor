@@ -9,7 +9,7 @@ const allSettled = (promises: Promise<Response>[]) => {
   const wrappedPromises = promises.map((p) =>
     Promise.resolve(p).then(
       (value) => ({ state: 'fulfilled', value }),
-      (err) => ({ state: 'rejected', reason: err }),
+      (err: unknown) => ({ state: 'rejected', reason: err }),
     ),
   );
 
@@ -22,7 +22,7 @@ export const healthChecker = async (healthChecks: HealthCheck[]) => {
     let uri = `${healthCheck.protocol}://${healthCheck.host}`;
 
     if (healthCheck.port) {
-      uri += `:${healthCheck.port}`;
+      uri += `:${healthCheck.port.toString()}`;
     }
 
     uri += healthCheck.path;

@@ -6,7 +6,7 @@ import unicorn from 'eslint-plugin-unicorn';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'coverage'],
+    ignores: ['dist', 'coverage', 'public'],
   },
   eslint.configs.recommended,
   unicorn.configs['flat/all'],
