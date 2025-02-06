@@ -1,4 +1,4 @@
-import type { ChartVisibility, ExpressStatusConfig } from './types/config.js';
+import type { ExpressStatusConfig } from './types/config.js';
 import type { Request, Response, NextFunction } from 'express';
 import type { SocketRequest } from './types/request.js';
 import fs from 'node:fs/promises';
@@ -13,8 +13,8 @@ import { validate } from './helpers/validate.js';
 export const statusMonitor = async (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
   const bodyClasses = [];
-  for (const key in validatedConfig.chartVisibility) {
-    if (validatedConfig.chartVisibility[key as keyof ChartVisibility] === false) {
+  for (const [key, value] of Object.entries(validatedConfig.chartVisibility)) {
+    if (value === false) {
       bodyClasses.push(`hide-${key}`);
     }
   }

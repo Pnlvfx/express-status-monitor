@@ -1558,14 +1558,15 @@ __metadata:
     pidusage: "npm:^3.0.2"
     prettier: "npm:^3.4.2"
     rimraf: "npm:^6.0.1"
+    socket.io: "npm:^4.7.5"
     ts-jest: "npm:^29.2.5"
     ts-node: "npm:^10.9.2"
     ts-unused-exports: "npm:^11.0.1"
     typescript: "npm:^5.7.3"
     typescript-eslint: "npm:^8.23.0"
   peerDependencies:
-    event-loop-stats: ^1.4.1
-    socket.io: ^4.7.5
+    event-loop-stats: "*"
+    socket.io: "*"
   peerDependenciesMeta:
     event-loop-stats:
       optional: true
@@ -7131,7 +7132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io@npm:^4.8.1":
+"socket.io@npm:^4.7.5, socket.io@npm:^4.8.1":
   version: 4.8.1
   resolution: "socket.io@npm:4.8.1"
   dependencies:

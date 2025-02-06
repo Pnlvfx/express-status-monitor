@@ -1,5 +1,5 @@
 import type { InitialStatusConfig, ValidExpressStatusConfig } from '../types/config.js';
-import type { ExpressServer } from '../types/request.js';
+import type { Server as NodeServer } from 'node:http';
 import { Server, type Socket } from 'socket.io';
 import { gatherOsMetrics } from './gather-os-metrics.js';
 import type { OsMetrics } from '../types/os-metrics.js';
@@ -13,7 +13,7 @@ const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
   });
 };
 
-export const socketIoInit = (server: ExpressServer, config: InitialStatusConfig) => {
+export const socketIoInit = (server: NodeServer, config: InitialStatusConfig) => {
   if (io === undefined) {
     io = config.websocket ?? new Server(server);
 
