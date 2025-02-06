@@ -37,7 +37,7 @@
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "prepare": "husky && npm run build",
     "prepack": "yarn build",
-    "prepublishOnly": "yarn test && eslint"
+    "prepublishOnly": "yarn test"
   },
   "files": [
     "dist",
@@ -84,5 +84,8 @@
     "event-loop-stats": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
