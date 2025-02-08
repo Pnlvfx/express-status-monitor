@@ -22,6 +22,6 @@ export const validate = (config?: ExpressStatusConfig) => {
     websocket: config?.websocket,
     chartVisibility: config?.chartVisibility ? mungeChartVisibility(config.chartVisibility) : mungeChartVisibility(defaultConfig.chartVisibility),
     ignoreStartsWith: config?.ignoreStartsWith ?? defaultConfig.ignoreStartsWith,
-    healthChecks: config?.healthChecks && Array.isArray(config.healthChecks) ? config.healthChecks : defaultConfig.healthChecks,
+    healthChecks: config?.healthChecks ?? defaultConfig.healthChecks,
   };
 };

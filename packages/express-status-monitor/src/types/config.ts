@@ -18,7 +18,7 @@ export interface ValidExpressStatusConfig extends Shared {
 }
 
 export interface ExpressStatusConfig extends Partial<Shared> {
-  spans: RetentionSpan[];
+  spans?: RetentionSpan[];
 }
 
 type PartialSpan = Omit<OsMetrics, 'interval' | 'retention'>;

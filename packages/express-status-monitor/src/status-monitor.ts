@@ -10,7 +10,7 @@ import { healthChecker } from './helpers/health-checker.js';
 import { onHeadersListener } from './helpers/on-headers-listener.js';
 import { validate } from './helpers/validate.js';
 
-export const statusMonitor = async (config?: ExpressStatusConfig) => {
+export const statusMonitor = async (config: ExpressStatusConfig = {}) => {
   const validatedConfig = validate(config);
   const bodyClasses = [];
 
