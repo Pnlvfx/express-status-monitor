@@ -15,6 +15,10 @@
     "tsc": {
       "dependsOn": ["^tsc"],
       "outputs": []
+    },
+    "unused": {
+      "dependsOn": ["^unused"],
+      "outputs": []
     }
   }
 }

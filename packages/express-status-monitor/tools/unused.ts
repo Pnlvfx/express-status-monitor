@@ -1,8 +1,7 @@
 import { findUnusedExports } from '@goatjs/node/ts-unused-exports';
 
 const unused = findUnusedExports({
-  ignoreFolders: ['./src/schemas'],
-  ignoreFiles: ['eslint.config.js', 'jest.config.ts'],
+  ignoreFiles: ['eslint.config.js', 'jest.config.ts', 'status-monitor.ts'],
 });
 
 if (unused) {

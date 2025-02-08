@@ -8,12 +8,12 @@ export interface OsMetrics extends RetentionSpan {
   responses: OsMetricsResponse[];
 }
 
-export interface OsMetricsOS extends pidusage.Status {
+interface OsMetricsOS extends pidusage.Status {
   load: number[];
   heap: v8.HeapInfo;
   loop?: EventLoopStats;
 }
 
-export interface OsMetricsResponse {
+interface OsMetricsResponse {
   timestamp: number;
 }
