@@ -19,11 +19,11 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
+    "@eslint/js": "^9.20.0",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
-    "eslint": "9.19.0",
+    "eslint": "9.20.0",
     "eslint-plugin-sonarjs": "^3.0.1",
     "eslint-plugin-unicorn": "^56.0.1",
     "event-loop-stats": "^1.4.1",

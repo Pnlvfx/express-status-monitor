@@ -46,7 +46,7 @@
     "public"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
+    "@eslint/js": "^9.20.0",
     "@goatjs/node": "github:Pnlvfx/goatjs#workspace=@goatjs/node",
     "@types/debug": "^4.1.12",
     "@types/eslint__js": "^8.42.3",
@@ -54,7 +54,7 @@
     "@types/node": "^22.13.1",
     "@types/on-headers": "^1.0.3",
     "@types/pidusage": "^2.0.5",
-    "eslint": "^9.19.0",
+    "eslint": "9.20.0",
     "eslint-plugin-sonarjs": "^3.0.1",
     "eslint-plugin-unicorn": "^56.0.1",
     "event-loop-stats": "^1.4.1",
