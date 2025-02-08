@@ -27,11 +27,7 @@ export const healthChecker = async (healthChecks: HealthCheck[]) => {
 
     uri += healthCheck.path;
 
-    checkPromises.push(
-      fetch(uri, {
-        method: 'GET',
-      }),
-    );
+    checkPromises.push(fetch(uri));
   }
 
   const checkResults: CheckResult[] = [];

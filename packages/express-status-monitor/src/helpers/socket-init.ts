@@ -6,13 +6,6 @@ import type { OsMetrics } from '../types/os-metrics.js';
 
 let io: Server | undefined;
 
-const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
-  socket.emit('esm_start', config.spans);
-  socket.on('esm_change', () => {
-    socket.emit('esm_start', config.spans);
-  });
-};
-
 export const socketIoInit = (server: NodeServer, config: InitialStatusConfig) => {
   if (io === undefined) {
     io = config.websocket ?? new Server(server);
@@ -32,4 +25,11 @@ export const socketIoInit = (server: NodeServer, config: InitialStatusConfig) =>
       interval.unref();
     }
   }
+};
+
+const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
+  socket.emit('esm_start', config.spans);
+  socket.on('esm_change', () => {
+    socket.emit('esm_start', config.spans);
+  });
 };
