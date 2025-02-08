@@ -13,8 +13,9 @@ import { validate } from './helpers/validate.js';
 export const statusMonitor = async (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
   const bodyClasses = [];
+
   for (const [key, value] of Object.entries(validatedConfig.chartVisibility)) {
-    if (value === false) {
+    if (!value) {
       bodyClasses.push(`hide-${key}`);
     }
   }

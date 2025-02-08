@@ -1,21 +1,25 @@
 import type { Server } from 'socket.io';
 import type { OsMetrics } from './os-metrics.js';
-export interface ValidExpressStatusConfig {
+
+interface Shared {
   title: string;
   theme: string;
   path: string;
   socketPath: string;
-  websocket?: Server;
-  spans: OsMetrics[];
-  port?: number;
   chartVisibility: ChartVisibility;
   healthChecks: HealthCheck[];
   ignoreStartsWith: string;
+  websocket?: Server;
+  port?: number;
 }
 
-type OmittedConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: RetentionSpan[] };
+export interface ValidExpressStatusConfig extends Shared {
+  spans: OsMetrics[];
+}
 
-export type ExpressStatusConfig = Partial<OmittedConfig>;
+export interface ExpressStatusConfig extends Partial<Shared> {
+  spans: RetentionSpan[];
+}
 
 type PartialSpan = Omit<OsMetrics, 'interval' | 'retention'>;
 
