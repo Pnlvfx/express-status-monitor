@@ -21,10 +21,6 @@ export interface ExpressStatusConfig extends Partial<Shared> {
   spans?: RetentionSpan[];
 }
 
-type PartialSpan = Omit<OsMetrics, 'interval' | 'retention'>;
-
-export type InitialStatusConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: Partial<PartialSpan>[] & RetentionSpan[] };
-
 export interface ChartVisibility {
   cpu?: boolean;
   mem?: boolean;

@@ -4,7 +4,7 @@ import { statusMonitor } from '@goatjs/express-status-monitor';
 const app = express();
 app.disable('x-powered-by');
 
-app.use(await statusMonitor());
+app.use(await statusMonitor({ title: 'Example' }));
 app.use(express.urlencoded({ extended: true, limit: '500mb' }));
 app.use(express.json({ limit: '500mb' }));
 app.set('trust proxy', true);

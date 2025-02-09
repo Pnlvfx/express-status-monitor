@@ -1,7 +1,7 @@
-import type { ChartVisibility, ExpressStatusConfig } from '../types/config.js';
+import type { ChartVisibility } from '../types/config.js';
 import { defaultConfig } from './default-config.js';
 
-const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
+export const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
   for (const k of Object.keys(defaultConfig.chartVisibility)) {
     const key = k as keyof ChartVisibility;
     if (configChartVisibility[key] === false) {
@@ -9,19 +9,4 @@ const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
     }
   }
   return defaultConfig.chartVisibility;
-};
-
-export const validate = (config?: ExpressStatusConfig) => {
-  return {
-    title: config?.title ?? defaultConfig.title,
-    theme: config?.theme ?? defaultConfig.theme,
-    path: config?.path ?? defaultConfig.path,
-    socketPath: config?.socketPath ?? defaultConfig.socketPath,
-    spans: config?.spans ?? defaultConfig.spans,
-    port: config?.port,
-    websocket: config?.websocket,
-    chartVisibility: config?.chartVisibility ? mungeChartVisibility(config.chartVisibility) : mungeChartVisibility(defaultConfig.chartVisibility),
-    ignoreStartsWith: config?.ignoreStartsWith ?? defaultConfig.ignoreStartsWith,
-    healthChecks: config?.healthChecks ?? defaultConfig.healthChecks,
-  };
 };

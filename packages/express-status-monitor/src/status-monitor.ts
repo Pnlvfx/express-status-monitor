@@ -8,25 +8,37 @@ import onHeaders from 'on-headers';
 import { socketIoInit } from './helpers/socket-init.js';
 import { healthChecker } from './helpers/health-checker.js';
 import { onHeadersListener } from './helpers/on-headers-listener.js';
-import { validate } from './helpers/validate.js';
+import { mungeChartVisibility } from './helpers/validate.js';
+import { defaultConfig } from './helpers/default-config.js';
 
-export const statusMonitor = async (config: ExpressStatusConfig = {}) => {
-  const validatedConfig = validate(config);
+export const statusMonitor = async ({
+  chartVisibility = defaultConfig.chartVisibility,
+  healthChecks = defaultConfig.healthChecks,
+  ignoreStartsWith = defaultConfig.ignoreStartsWith,
+  path: configPath = defaultConfig.path,
+  socketPath = defaultConfig.socketPath,
+  spans = defaultConfig.spans,
+  theme = defaultConfig.theme,
+  title = defaultConfig.title,
+  port,
+  websocket,
+}: ExpressStatusConfig = {}) => {
+  chartVisibility = mungeChartVisibility(chartVisibility);
   const bodyClasses = [];
 
-  for (const [key, value] of Object.entries(validatedConfig.chartVisibility)) {
+  for (const [key, value] of Object.entries(chartVisibility)) {
     if (!value) {
       bodyClasses.push(`hide-${key}`);
     }
   }
 
   const data = {
-    title: validatedConfig.title,
-    port: validatedConfig.port,
-    socketPath: validatedConfig.socketPath,
+    title,
+    port,
+    socketPath,
     bodyClasses: bodyClasses.join(' '),
     script: await fs.readFile(path.join(import.meta.dirname, '../public/javascripts/app.js')),
-    style: await fs.readFile(path.join(import.meta.dirname, '../public/stylesheets/', validatedConfig.theme)),
+    style: await fs.readFile(path.join(import.meta.dirname, '../public/stylesheets/', theme)),
   };
 
   const htmlTmpl = await fs.readFile(path.join(import.meta.dirname, '../public/index.html'));
@@ -34,16 +46,17 @@ export const statusMonitor = async (config: ExpressStatusConfig = {}) => {
 
   const middleware = async (socketRequest: Request, res: Response, next: NextFunction) => {
     const req = socketRequest as SocketRequest;
-    socketIoInit(req.socket.server, validatedConfig);
+    /** @ts-expect-error spans will change from RetentionSpan[] to OsMetrics[] */
+    socketIoInit(req.socket.server, { websocket, spans });
     const startTime = process.hrtime();
 
-    if (req.path === validatedConfig.path) {
-      const results = await healthChecker(validatedConfig.healthChecks);
+    if (req.path === configPath) {
+      const results = await healthChecker(healthChecks);
       res.send(render({ ...data, healthCheckResults: results }));
     } else {
-      if (!req.path.startsWith(validatedConfig.ignoreStartsWith)) {
+      if (!req.path.startsWith(ignoreStartsWith)) {
         onHeaders(res, () => {
-          onHeadersListener(res.statusCode, startTime, validatedConfig.spans);
+          onHeadersListener(res.statusCode, startTime, spans);
         });
       }
 
@@ -53,7 +66,7 @@ export const statusMonitor = async (config: ExpressStatusConfig = {}) => {
 
   middleware.middleware = middleware;
   middleware.pageRoute = async (_req: Request, res: Response) => {
-    const results = await healthChecker(validatedConfig.healthChecks);
+    const results = await healthChecker(healthChecks);
     res.send(render({ ...data, healthCheckResults: results }));
   };
 
