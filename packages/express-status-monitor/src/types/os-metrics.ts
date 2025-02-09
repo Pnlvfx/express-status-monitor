@@ -14,6 +14,9 @@ interface OsMetricsOS extends pidusage.Status {
   loop?: EventLoopStats;
 }
 
-interface OsMetricsResponse {
+export interface OsMetricsResponse {
   timestamp: number;
+  count: number;
+  mean: number;
+  [key: number]: number;
 }

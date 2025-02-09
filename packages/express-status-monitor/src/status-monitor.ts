@@ -56,6 +56,7 @@ export const statusMonitor = async ({
     } else {
       if (!req.path.startsWith(ignoreStartsWith)) {
         onHeaders(res, () => {
+          /** @ts-expect-error spans will change from RetentionSpan[] to OsMetrics[] */
           onHeadersListener(res.statusCode, startTime, spans);
         });
       }
