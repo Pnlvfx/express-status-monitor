@@ -9,8 +9,7 @@ export default tseslint.config(
     ignores: ['dist', 'coverage', 'public'],
   },
   eslint.configs.recommended,
-  unicorn.configs['flat/all'],
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  unicorn.configs.all,
   sonarjs.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.strictTypeChecked,

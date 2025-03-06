@@ -16,22 +16,21 @@
   },
   "dependencies": {
     "@goatjs/express-status-monitor": "*",
-    "express": "^4.21.2"
+    "event-loop-stats": "^1.4.1",
+    "express": "^5.0.1",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.20.0",
-    "@types/eslint__js": "^8.42.3",
+    "@eslint/js": "^9.21.0",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.13.1",
-    "eslint": "9.20.0",
-    "eslint-plugin-sonarjs": "^3.0.1",
-    "eslint-plugin-unicorn": "^56.0.1",
-    "event-loop-stats": "^1.4.1",
-    "globals": "^15.14.0",
-    "prettier": "^3.4.2",
+    "@types/node": "^22.13.9",
+    "eslint": "9.21.0",
+    "eslint-plugin-sonarjs": "^3.0.2",
+    "eslint-plugin-unicorn": "^57.0.0",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
-    "socket.io": "^4.8.1",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.23.0"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0"
   }
 }
