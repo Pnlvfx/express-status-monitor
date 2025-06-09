@@ -1,6 +1,6 @@
 import { findUnusedExports } from '@goatjs/ts-unused-exports';
 
-const unused = findUnusedExports({
+const unused = await findUnusedExports({
   ignoreFiles: ['eslint.config.js', 'jest.config.ts', 'status-monitor.ts'],
 });
 
