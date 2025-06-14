@@ -66,6 +66,7 @@ export const statusMonitor = async ({
   };
 
   middleware.middleware = middleware;
+
   middleware.pageRoute = async (_req: Request, res: Response) => {
     const results = await healthChecker(healthChecks);
     res.send(render({ ...data, healthCheckResults: results }));

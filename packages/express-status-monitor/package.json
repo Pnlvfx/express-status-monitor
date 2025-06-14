@@ -51,7 +51,6 @@
     "@goatjs/eslint": "github:Pnlvfx/eslint",
     "@goatjs/ts-unused-exports": "github:Pnlvfx/goatjs#workspace=@goatjs/ts-unused-exports",
     "@goatjs/typescript-config": "github:Pnlvfx/typescript-config",
-    "@types/debug": "^4.1.12",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.1",
     "@types/on-headers": "^1.0.4",
@@ -63,6 +62,7 @@
     "globals": "^16.2.0",
     "husky": "^9.1.7",
     "jest": "^30.0.0",
+    "pidusage": "^4.0.1",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "socket.io": "^4.8.1",
@@ -72,7 +72,6 @@
     "typescript-eslint": "^8.34.0"
   },
   "dependencies": {
-    "debug": "^4.4.1",
     "handlebars": "^4.7.8",
     "on-headers": "^1.0.2"
   },

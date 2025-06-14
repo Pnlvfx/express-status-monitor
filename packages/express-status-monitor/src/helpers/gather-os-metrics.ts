@@ -19,6 +19,13 @@ const defaultResponse = {
   timestamp: Date.now(),
 };
 
+/** TODO We're trying to drop pidusage usage as now node will provide
+ * same statistics without it, we already replaced pidusage memory usage
+ * with node memoryUsage.rss.
+ * Out next step, as we don't really have informations about what the client is using from the
+ * socket span, is to move the client to typescript and compile it from typescript
+ * that will allow us to use the same types and so we know what the client need and we can provide it.
+ */
 export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
   pidusage(process.pid, (err, stats) => {
     if (err) {
