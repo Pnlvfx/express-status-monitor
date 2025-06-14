@@ -1,7 +1,6 @@
 import type { EventLoopStats } from '../types/event-loop-stats.js';
 import type { OsMetrics } from '../types/os-metrics.js';
 import pidusage from 'pidusage';
-import _debug from 'debug';
 import os from 'node:os';
 import v8 from 'node:v8';
 import { Server } from 'socket.io';
@@ -9,8 +8,6 @@ import { sendMetrics } from './send-metrics.js';
 import { getEventLoopStats } from './event-loop-stats.cjs';
 
 const eventLoopStats = getEventLoopStats();
-
-const debug = _debug('express-performance-monitor');
 
 const defaultResponse = {
   2: 0,
@@ -25,13 +22,13 @@ const defaultResponse = {
 export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
   pidusage(process.pid, (err, stats) => {
     if (err) {
-      debug(err);
+      // eslint-disable-next-line no-console
+      console.error(err);
       return;
     }
 
     const last = span.responses.at(-1);
-
-    const memory = stats.memory / 1024 / 1024;
+    const memory = process.memoryUsage.rss() / 1024 / 1024;
     const load = os.loadavg();
     const timestamp = Date.now();
     const heap = v8.getHeapStatistics();
