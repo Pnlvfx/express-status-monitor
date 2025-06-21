@@ -1,5 +1,5 @@
 import express from 'express';
-import { statusMonitor } from '@goatjs/express-status-monitor';
+import { statusMonitor } from '@frozenjs/express-status-monitor';
 
 const app = express();
 app.disable('x-powered-by');

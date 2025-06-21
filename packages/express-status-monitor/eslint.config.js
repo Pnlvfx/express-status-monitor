@@ -8,7 +8,6 @@ import rules from '@goatjs/eslint/node/rules';
 export default tseslint.config(
   { ignores: ['dist', 'coverage', 'public'] },
   eslint.configs.recommended,
-  /** @ts-expect-error Type error after latest eslint version */
   unicorn.configs.all,
   sonarjs.configs.recommended,
   ...tseslint.configs.strictTypeChecked,

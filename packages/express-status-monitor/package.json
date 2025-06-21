@@ -52,11 +52,11 @@
     "@goatjs/ts-unused-exports": "github:Pnlvfx/goatjs#workspace=@goatjs/ts-unused-exports",
     "@goatjs/typescript-config": "github:Pnlvfx/typescript-config",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.0.1",
+    "@types/node": "^24.0.3",
     "@types/on-headers": "^1.0.4",
     "@types/pidusage": "^2.0.5",
     "eslint": "9.29.0",
-    "eslint-plugin-sonarjs": "^3.0.2",
+    "eslint-plugin-sonarjs": "^3.0.3",
     "eslint-plugin-unicorn": "^59.0.1",
     "event-loop-stats": "^1.4.1",
     "globals": "^16.2.0",
@@ -68,7 +68,7 @@
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.34.0"
+    "typescript-eslint": "^8.34.1"
   },
   "dependencies": {
     "handlebars": "^4.7.8",
