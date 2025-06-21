@@ -1,7 +1,7 @@
 {
   "name": "@frozenjs/express-status-monitor",
   "description": "Realtime monitor for Express server appliations",
-  "version": "2025.6.21",
+  "version": "2025.6.22",
   "author": {
     "email": "simonegauli@gmail.com",
     "name": "Simone Gauli"
