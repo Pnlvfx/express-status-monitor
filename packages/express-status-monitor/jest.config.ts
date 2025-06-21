@@ -1,6 +1,6 @@
 import type { JestConfigWithTsJest } from 'ts-jest';
 
-const jestConfig: JestConfigWithTsJest = {
+const jestConfig = {
   verbose: true,
   // detectOpenHandles: true,
   extensionsToTreatAsEsm: ['.ts'],
@@ -17,6 +17,6 @@ const jestConfig: JestConfigWithTsJest = {
     ],
   },
   testMatch: ['**/?(*.)+(test).ts'],
-};
+} satisfies JestConfigWithTsJest;
 
 export default jestConfig;

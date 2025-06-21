@@ -15,8 +15,7 @@
     "unused": "turbo unused",
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-    "publish:express-status-monitor": "npm publish --access public --workspace=@goatjs/express-status-monitor"
+    "lint": "turbo lint"
   },
   "workspaces": [
     "apps/*",
